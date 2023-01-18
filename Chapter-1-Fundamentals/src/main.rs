@@ -1,31 +1,3 @@
-fn main() {
-    println!("wow!");
-    println!("this chapter is mostly the basics about data types, variables and functions...");
-
-    // Variables
-    let x = 5;
-    let y = 2;
-
-    // Data types
-    let a: i32 = 5;
-    let b: i32 = 2;
-    let c: f64 = 5.0;
-    let d: f64 = 2.0;
-
-    // Functions
-    println!("{} + {} = {}", x, y, add(x, y));
-    println!("{} + {} = {}", c, d, add_generic(c, d));
-
-    // if statements
-    let e = if_statements(a, b);
-    println!("{} is the biggest number", e);
-
-    //loops, for loops
-    loop_print_5_times("loop");
-    for_loop_print_5_times("for loop");
-    while_loop_print_n_times("while loop", 2);
-}
-
 // i32 type addition
 fn add(a: i32, b: i32) -> i32 {
     a + b
@@ -67,4 +39,43 @@ fn while_loop_print_n_times(s: &str, n: i32) {
         println!("{} at {}", s, counter);
         counter -= 1;
     }
+}
+
+// match expressions
+fn match_expr(s: &str) {
+    match s {
+        "hello" => println!("hello"),
+        "world" => println!("world"),
+        _ => println!("nothing"),
+    }
+}
+fn main() {
+    println!("wow!");
+    println!("this chapter is mostly the basics about data types, variables and functions...");
+
+    // Variables
+    let x = 5;
+    let y = 2;
+
+    // Data types
+    let a: i32 = 5;
+    let b: i32 = 2;
+    let c: f64 = 5.0;
+    let d: f64 = 2.0;
+
+    // Functions
+    println!("{} + {} = {}", x, y, add(x, y));
+    println!("{} + {} = {}", c, d, add_generic(c, d));
+
+    // if statements
+    let e = if_statements(a, b);
+    println!("{} is the biggest number", e);
+
+    //loops, for loops
+    loop_print_5_times("loop");
+    for_loop_print_5_times("for loop");
+    while_loop_print_n_times("while loop", 2);
+
+    // match expressions
+    match_expr("hello");
 }
