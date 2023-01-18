@@ -5,4 +5,4 @@ taking rust courses online, from [ zerotomastery ]( https://zerotomastery.io ) a
 out of personal interest and i find following courses to be sufficiently effective for my learning style.
 
 # Tech used
-(Rust language)[https://www.rust-lang.org/]
+[ Rust language ]( https://www.rust-lang.org/ )
