@@ -19,6 +19,11 @@ fn main() {
     // if statements
     let e = if_statements(a, b);
     println!("{} is the biggest number", e);
+
+    //loops, for loops
+    loop_print_5_times("loop");
+    for_loop_print_5_times("for loop");
+    while_loop_print_n_times("while loop", 2);
 }
 
 // i32 type addition
@@ -34,4 +39,32 @@ fn add_generic<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 // if statements
 fn if_statements(a: i32, b: i32) -> i32 {
     if a > b { a } else { b }
+}
+
+// loop
+fn loop_print_5_times(s: &str) {
+    let mut counter = 5;
+    loop {
+        println!("{} at {counter}", s);
+        counter -= 1;
+        if counter == 0 {
+            break;
+        }
+    }
+}
+
+// for loop
+fn for_loop_print_5_times(s: &str) {
+    for i in 0..5 {
+        println!("{} in {}", s, i);
+    }
+}
+
+// while looop
+fn while_loop_print_n_times(s: &str, n: i32) {
+    let mut counter = n;
+    while counter > 0 {
+        println!("{} at {}", s, counter);
+        counter -= 1;
+    }
 }
