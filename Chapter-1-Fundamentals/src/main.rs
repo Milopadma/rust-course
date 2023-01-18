@@ -15,6 +15,10 @@ fn main() {
     // Functions
     println!("{} + {} = {}", x, y, add(x, y));
     println!("{} + {} = {}", c, d, add_generic(c, d));
+
+    // if statements
+    let e = if_statements(a, b);
+    println!("{} is the biggest number", e);
 }
 
 // i32 type addition
@@ -25,4 +29,9 @@ fn add(a: i32, b: i32) -> i32 {
 // generic types addition
 fn add_generic<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b
+}
+
+// if statements
+fn if_statements(a: i32, b: i32) -> i32 {
+    if a > b { a } else { b }
 }
