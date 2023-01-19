@@ -49,6 +49,22 @@ fn match_expr(s: &str) {
         _ => println!("nothing"),
     }
 }
+
+// enums, q: what is an enum? a: an enum is a type that can be one of a few different variants, constnt
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+
+// using the enum
+fn color_match(c: Color) {
+    match c {
+        Color::Red => println!("red"),
+        Color::Green => println!("green"),
+        Color::Blue => println!("blue"),
+    }
+}
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -78,4 +94,7 @@ fn main() {
 
     // match expressions
     match_expr("hello");
+
+    // enums
+    color_match(Color::Red);
 }
