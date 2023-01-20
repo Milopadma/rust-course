@@ -103,6 +103,20 @@ fn to_tuple(vector: &Vec<i32>) -> (i32, i32) {
     let y = vector[1];
     (x, y)
 }
+
+fn cartesian_check(x: i32, y: i32) -> (i32, i32) {
+    if y > 5 {
+        println!("greater than 5");
+        return (x, y);
+    } else if y < 5 {
+        println!("less than 5");
+        return (x, y);
+    } else {
+        println!("equal to 5");
+        return (x, y);
+    }
+}
+
 // print out the Drink
 fn print_drink(d: Drink) {
     println!("{}, {}, {}", d.price, d.size, match d.drink_type {
@@ -191,4 +205,8 @@ fn main() {
     let (x, y) = to_tuple(&vector);
     println!("x: {}, y: {}", tuple.0, tuple.1); // one way
     println!("x: {}, y: {}", x, y); // better way
+
+    // cartesian check
+    let (x, y) = cartesian_check(1, 5);
+    println!("x: {}, y: {}", x, y);
 }
