@@ -67,6 +67,7 @@ fn color_match(c: Color) {
 }
 
 // structs, a data type that contains multiple pieces of data
+// all fields must be filled in when creating an instance of a struct
 struct Point {
     x: i32, // a field
     y: i32,
@@ -77,13 +78,30 @@ struct Similar {
     b: u32,
 }
 
+struct ShippingBox {
+    width: u32,
+    height: u32,
+    depth: u32,
+}
+
 // using the struct
 fn struct_use() {
     let p = Point { x: 1, y: 2 };
     let s = Similar { a: 1, b: 2 };
+    let shipping_box = ShippingBox {
+        width: 1,
+        height: 2,
+        depth: 3,
+    };
 
     println!("x: {}, y: {}", p.x, p.y);
     println!("a: {}, b: {}", s.a, s.b);
+    println!(
+        "width: {}, height: {}, depth: {}",
+        shipping_box.width,
+        shipping_box.height,
+        shipping_box.depth
+    );
 }
 
 fn main() {
