@@ -57,6 +57,12 @@ enum Color {
     Blue,
 }
 
+enum Drinks {
+    Cola,
+    Sprite,
+    Fanta,
+    Milo,
+}
 // using the enum
 fn color_match(c: Color) {
     match c {
@@ -82,6 +88,23 @@ struct ShippingBox {
     width: u32,
     height: u32,
     depth: u32,
+}
+
+struct Drink {
+    price: f64,
+    size: u32,
+    drink_type: Drinks,
+}
+
+// print out the Drink
+fn print_drink(d: Drink) {
+    println!("{}, {}, {}", d.price, d.size, match d.drink_type {
+        // match returns a string  implicitly
+        Drinks::Cola => "Cola",
+        Drinks::Sprite => "Sprite",
+        Drinks::Fanta => "Fanta",
+        Drinks::Milo => "Milo",
+    });
 }
 
 // using the struct
@@ -139,4 +162,19 @@ fn main() {
 
     // structs
     struct_use();
+
+    // drinks activity
+    let a_drink = Drink {
+        price: 1.0,
+        size: 500,
+        drink_type: Drinks::Cola,
+    };
+    let b_drink = Drink {
+        price: 1.0,
+        size: 500,
+        drink_type: Drinks::Milo,
+    };
+
+    print_drink(a_drink);
+    print_drink(b_drink);
 }
