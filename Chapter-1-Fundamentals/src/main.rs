@@ -96,6 +96,13 @@ struct Drink { // drink struct, shows what types of data this struct can hold
     drink_type: Drinks,
 }
 
+// tuples, they are a type of record, store data anonymously and no names are required
+// useful for returning multiple values from a function
+fn to_tuple(vector: &Vec<i32>) -> (i32, i32) {
+    let x = vector[0];
+    let y = vector[1];
+    (x, y)
+}
 // print out the Drink
 fn print_drink(d: Drink) {
     println!("{}, {}, {}", d.price, d.size, match d.drink_type {
@@ -177,4 +184,11 @@ fn main() {
 
     print_drink(a_drink);
     print_drink(b_drink);
+
+    // tuples
+    let vector = vec![1, 2];
+    let tuple = to_tuple(&vector);
+    let (x, y) = to_tuple(&vector);
+    println!("x: {}, y: {}", tuple.0, tuple.1); // one way
+    println!("x: {}, y: {}", x, y); // better way
 }
