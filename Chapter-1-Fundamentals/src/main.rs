@@ -60,7 +60,7 @@ enum Color {
 // using the enum
 fn color_match(c: Color) {
     match c {
-        Color::Red => println!("red"),
+        Color::Red => println!("red"), // a variant
         Color::Green => println!("green"),
         Color::Blue => println!("blue"),
     }
