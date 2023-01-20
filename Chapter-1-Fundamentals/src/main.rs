@@ -57,7 +57,7 @@ enum Color {
     Blue,
 }
 
-enum Drinks {
+enum Drinks { // enumerations, variants of this data type
     Cola,
     Sprite,
     Fanta,
@@ -90,7 +90,7 @@ struct ShippingBox {
     depth: u32,
 }
 
-struct Drink {
+struct Drink { // drink struct, shows what types of data this struct can hold
     price: f64,
     size: u32,
     drink_type: Drinks,
