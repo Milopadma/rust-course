@@ -65,6 +65,27 @@ fn color_match(c: Color) {
         Color::Blue => println!("blue"),
     }
 }
+
+// structs, a data type that contains multiple pieces of data
+struct Point {
+    x: i32, // a field
+    y: i32,
+}
+
+struct Similar {
+    a: u32,
+    b: u32,
+}
+
+// using the struct
+fn struct_use() {
+    let p = Point { x: 1, y: 2 };
+    let s = Similar { a: 1, b: 2 };
+
+    println!("x: {}, y: {}", p.x, p.y);
+    println!("a: {}, b: {}", s.a, s.b);
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -97,4 +118,7 @@ fn main() {
 
     // enums
     color_match(Color::Red);
+
+    // structs
+    struct_use();
 }
