@@ -165,6 +165,23 @@ fn expressions_example() {
 
     println!("new_num: {}, y: {}", new_num, y);
 }
+
+// simulation of a access level protocol
+enum Access {
+    Admin,
+    User,
+    Guest,
+}
+
+fn access_level(a: Access) -> bool {
+    let access_level = a;
+    let can_access_file = match access_level {
+        Access::Admin => true,
+        _ => false,
+    };
+
+    can_access_file
+}
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -226,4 +243,9 @@ fn main() {
     // cartesian check
     let (x, y) = cartesian_check(1, 5);
     println!("x: {}, y: {}", x, y);
+
+    // access level
+    let access = Access::Admin;
+    let can_access = access_level(access);
+    println!("can access: {}", can_access);
 }
