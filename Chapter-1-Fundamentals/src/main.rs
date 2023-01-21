@@ -148,6 +148,11 @@ fn struct_use() {
     );
 }
 
+// expressions
+fn expressions_example() {
+    let num = 3;
+    let new_num = if num == 3 { 5 } else { 6 };
+}
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
