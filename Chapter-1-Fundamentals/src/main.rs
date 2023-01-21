@@ -152,6 +152,18 @@ fn struct_use() {
 fn expressions_example() {
     let num = 3;
     let new_num = if num == 3 { 5 } else { 6 };
+
+    // match example
+    let x = 5;
+    let y = match x {
+        1 => 2,
+        2 => 3,
+        3 => 4,
+        4 => 5,
+        _ => 6,
+    };
+
+    println!("new_num: {}, y: {}", new_num, y);
 }
 fn main() {
     println!("wow!");
