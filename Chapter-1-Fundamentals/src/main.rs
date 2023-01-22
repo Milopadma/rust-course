@@ -260,5 +260,5 @@ fn main() {
     println!("can access: {}", can_access);
 
     // expressions
-    expressions_example();
+    expressions_activity(32);
 }
