@@ -182,6 +182,16 @@ fn access_level(a: Access) -> bool {
 
     can_access_file
 }
+
+// expressions activity
+fn expressions_activity(value: i32) {
+    match value {
+        // return true if value is above 100
+        x if x > 100 => println!("true"),
+        x if x < 100 => println!("false"),
+        _ => println!("nothing"),
+    }
+}
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -248,4 +258,7 @@ fn main() {
     let access = Access::Admin;
     let can_access = access_level(access);
     println!("can access: {}", can_access);
+
+    // expressions
+    expressions_example();
 }
