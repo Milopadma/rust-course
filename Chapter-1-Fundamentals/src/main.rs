@@ -207,7 +207,7 @@ mod ownership_example {
         }
     }
 
-    fn run() {
+    pub fn run() {
         let light = Light::Bright;
         display_light(light);
         // display_light(light); // error, light has been moved
@@ -283,4 +283,7 @@ fn main() {
 
     // expressions
     expressions_activity(32);
+
+    // memory and allocation
+    ownership_example::run();
 }
