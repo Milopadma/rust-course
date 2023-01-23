@@ -192,6 +192,28 @@ fn expressions_activity(value: i32) {
         _ => println!("nothing"),
     }
 }
+
+// memory and allocation - ownership
+mod ownership_example {
+    enum Light {
+        Bright,
+        Dull,
+    }
+
+    fn display_light(light: Light) {
+        match light {
+            Light::Bright => println!("bright"),
+            Light::Dull => println!("dull"),
+        }
+    }
+
+    fn run() {
+        let light = Light::Bright;
+        display_light(light);
+        // display_light(light); // error, light has been moved
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
