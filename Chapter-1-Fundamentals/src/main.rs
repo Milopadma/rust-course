@@ -201,6 +201,7 @@ mod ownership_example {
     }
 
     fn display_light(light: &Light) {
+        // use borrows &
         match light {
             Light::Bright => println!("bright"),
             Light::Dull => println!("dull"),
@@ -211,11 +212,11 @@ mod ownership_example {
         let light = Light::Bright;
         // display_light(light);
         // display_light(light); // error, light has been moved
-        
+
         // use borrows
-        let light = Light::Bright;
-        display_light(&light);
-        display_light(&light);
+        let light = Light::Bright; // light is owned by this fn
+        display_light(&light); // borrow
+        display_light(&light); // borrow
     }
 }
 
