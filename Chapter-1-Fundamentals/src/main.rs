@@ -200,7 +200,7 @@ mod ownership_example {
         Dull,
     }
 
-    fn display_light(light: Light) {
+    fn display_light(light: &Light) {
         match light {
             Light::Bright => println!("bright"),
             Light::Dull => println!("dull"),
@@ -209,8 +209,13 @@ mod ownership_example {
 
     pub fn run() {
         let light = Light::Bright;
-        display_light(light);
+        // display_light(light);
         // display_light(light); // error, light has been moved
+        
+        // use borrows
+        let light = Light::Bright;
+        display_light(&light);
+        display_light(&light);
     }
 }
 
