@@ -147,49 +147,50 @@ fn struct_use() {
         shipping_box.depth
     );
 }
+mod expressions {
+    // expressions
+    pub fn expressions_example() {
+        let num = 3;
+        let new_num = if num == 3 { 5 } else { 6 };
 
-// expressions
-fn expressions_example() {
-    let num = 3;
-    let new_num = if num == 3 { 5 } else { 6 };
+        // match example
+        let x = 5;
+        let y = match x {
+            1 => 2,
+            2 => 3,
+            3 => 4,
+            4 => 5,
+            _ => 6,
+        };
 
-    // match example
-    let x = 5;
-    let y = match x {
-        1 => 2,
-        2 => 3,
-        3 => 4,
-        4 => 5,
-        _ => 6,
-    };
+        println!("new_num: {}, y: {}", new_num, y);
+    }
 
-    println!("new_num: {}, y: {}", new_num, y);
-}
+    // simulation of a access level protocol
+    pub enum Access {
+        Admin,
+        User,
+        Guest,
+    }
 
-// simulation of a access level protocol
-enum Access {
-    Admin,
-    User,
-    Guest,
-}
+    pub fn access_level(a: Access) -> bool {
+        let access_level = a;
+        let can_access_file = match access_level {
+            Access::Admin => true,
+            _ => false,
+        };
 
-fn access_level(a: Access) -> bool {
-    let access_level = a;
-    let can_access_file = match access_level {
-        Access::Admin => true,
-        _ => false,
-    };
+        can_access_file
+    }
 
-    can_access_file
-}
-
-// expressions activity
-fn expressions_activity(value: i32) {
-    match value {
-        // return true if value is above 100
-        x if x > 100 => println!("true"),
-        x if x < 100 => println!("false"),
-        _ => println!("nothing"),
+    // expressions activity
+    pub fn expressions_activity(value: i32) {
+        match value {
+            // return true if value is above 100
+            x if x > 100 => println!("true"),
+            x if x < 100 => println!("false"),
+            _ => println!("nothing"),
+        }
     }
 }
 
@@ -283,12 +284,13 @@ fn main() {
     println!("x: {}, y: {}", x, y);
 
     // access level
-    let access = Access::Admin;
-    let can_access = access_level(access);
+    let access = expressions::Access::Admin;
+    let can_access = expressions::access_level(access);
     println!("can access: {}", can_access);
 
     // expressions
-    expressions_activity(32);
+    expressions::expressions_example();
+    expressions::expressions_activity(32);
 
     // memory and allocation
     ownership_example::run();
