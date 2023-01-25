@@ -221,6 +221,31 @@ mod ownership_example {
     }
 }
 
+mod ownership_example_2 {
+    struct Book {
+        pages: u32,
+        rating: u32,
+    }
+
+    fn display_page_count(book: &Book) {
+        println!("page count: {}", book.pages);
+    }
+
+    fn display_rating(book: &Book) {
+        println!("rating: {}", book.rating);
+    }
+
+    pub fn run() {
+        let book = Book {
+            pages: 100,
+            rating: 5,
+        };
+
+        display_page_count(&book);
+        display_rating(&book);
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -294,4 +319,5 @@ fn main() {
 
     // memory and allocation
     ownership_example::run();
+    ownership_example_2::run();
 }
