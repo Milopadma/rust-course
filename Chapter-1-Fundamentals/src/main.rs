@@ -246,6 +246,21 @@ mod ownership_example_2 {
     }
 }
 
+mod ownership_activity {
+    pub struct GroceryItem {
+        pub quantity: u32,
+        pub id: u32,
+    }
+
+    pub fn show_quantity(item: &GroceryItem) {
+        println!("quantity: {}", item.quantity);
+    }
+
+    pub fn show_id(item: &GroceryItem) {
+        println!("id: {}", item.id);
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -320,4 +335,12 @@ fn main() {
     // memory and allocation
     ownership_example::run();
     ownership_example_2::run();
+
+    // ownership activity
+    let item = ownership_activity::GroceryItem {
+        quantity: 5,
+        id: 2,
+    };
+    ownership_activity::show_quantity(&item);
+    ownership_activity::show_id(&item);
 }
