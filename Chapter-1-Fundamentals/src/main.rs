@@ -287,12 +287,59 @@ mod data_collections {
             }
         }
 
+        // self is a reference to the struct that this impl is for
         pub fn set_drink_type(&mut self, drink_type: Drinks) {
             self.drink_type = drink_type;
         }
 
         pub fn get_drink_type(&self) -> &Drinks {
             &self.drink_type
+        }
+    }
+}
+
+mod data_collections_activity {
+    #[derive(Debug)]
+    pub enum Color {
+        Red,
+        Green,
+        Blue,
+    }
+
+    #[derive(Debug)]
+    pub struct Shipping_Box {
+        pub width: u32,
+        pub height: u32,
+        pub weight: u32,
+        pub color: Color,
+    }
+
+    impl Shipping_Box {
+        pub fn new(width: u32, height: u32, weight: u32, color: Color) -> Shipping_Box {
+            Shipping_Box {
+                width,
+                height,
+                weight,
+                color,
+            }
+        }
+
+        pub fn set_color(&mut self, color: Color) {
+            self.color = color;
+        }
+
+        pub fn get_color(&self) -> &Color {
+            &self.color
+        }
+
+        pub fn print_box(&self) {
+            println!(
+                "width: {}, height: {}, weight: {}, color: {:?}",
+                self.width,
+                self.height,
+                self.weight,
+                self.color
+            );
         }
     }
 }
@@ -384,4 +431,15 @@ fn main() {
     let mut drink = data_collections::Drink::new(1.0, 500);
     drink.set_drink_type(data_collections::Drinks::Milo);
     println!("drink type: {:?}", drink.get_drink_type());
+
+    // data collections activity
+    let mut box1 = data_collections_activity::Shipping_Box::new(
+        1,
+        2,
+        3,
+        data_collections_activity::Color::Red
+    );
+    box1.print_box();
+    box1.set_color(data_collections_activity::Color::Green);
+    box1.print_box();
 }
