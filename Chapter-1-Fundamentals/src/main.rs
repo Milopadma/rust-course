@@ -307,7 +307,7 @@ mod data_collections_activity {
     }
 
     #[derive(Debug)]
-    pub struct Shipping_Box {
+    pub struct ShippingBox {
         pub width: u32,
         pub height: u32,
         pub weight: u32,
@@ -315,10 +315,10 @@ mod data_collections_activity {
     }
 
     // implements functions for the Shipping_Box struct, the problem domain is shipping boxes
-    impl Shipping_Box {
+    impl ShippingBox {
         // create a new shipping box
-        pub fn new(width: u32, height: u32, weight: u32, color: Color) -> Shipping_Box {
-            Shipping_Box {
+        pub fn new(width: u32, height: u32, weight: u32, color: Color) -> Self {
+            Self {
                 width,
                 height,
                 weight,
@@ -437,7 +437,7 @@ fn main() {
     println!("drink type: {:?}", drink.get_drink_type());
 
     // data collections activity
-    let mut box1 = data_collections_activity::Shipping_Box::new(
+    let mut box1 = data_collections_activity::ShippingBox::new(
         1,
         2,
         3,
