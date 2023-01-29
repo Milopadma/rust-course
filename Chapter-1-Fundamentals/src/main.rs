@@ -262,7 +262,39 @@ mod ownership_activity {
 }
 
 mod data_collections {
-    
+    #[derive(Debug)]
+    pub enum Drinks {
+        Cola,
+        Sprite,
+        Fanta,
+        Milo,
+    }
+
+    #[derive(Debug)]
+    pub struct Drink { // drink struct, shows what types of data this struct can hold
+        price: f64,
+        size: u32,
+        drink_type: Drinks,
+    }
+
+    // implements the Drink struct with the new function
+    impl Drink {
+        pub fn new(price: f64, size: u32) -> Drink {
+            Drink {
+                price,
+                size,
+                drink_type: Drinks::Cola,
+            }
+        }
+
+        pub fn set_drink_type(&mut self, drink_type: Drinks) {
+            self.drink_type = drink_type;
+        }
+
+        pub fn get_drink_type(&self) -> &Drinks {
+            &self.drink_type
+        }
+    }
 }
 
 fn main() {
@@ -347,4 +379,9 @@ fn main() {
     };
     ownership_activity::show_quantity(&item);
     ownership_activity::show_id(&item);
+
+    // data collections
+    let mut drink = data_collections::Drink::new(1.0, 500);
+    drink.set_drink_type(data_collections::Drinks::Milo);
+    println!("drink type: {:?}", drink.get_drink_type());
 }
