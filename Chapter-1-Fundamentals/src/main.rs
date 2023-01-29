@@ -314,7 +314,9 @@ mod data_collections_activity {
         pub color: Color,
     }
 
+    // implements functions for the Shipping_Box struct, the problem domain is shipping boxes
     impl Shipping_Box {
+        // create a new shipping box
         pub fn new(width: u32, height: u32, weight: u32, color: Color) -> Shipping_Box {
             Shipping_Box {
                 width,
@@ -324,6 +326,7 @@ mod data_collections_activity {
             }
         }
 
+        // getters and setters lmao
         pub fn set_color(&mut self, color: Color) {
             self.color = color;
         }
@@ -332,6 +335,7 @@ mod data_collections_activity {
             &self.color
         }
 
+        // the print method implementation
         pub fn print_box(&self) {
             println!(
                 "width: {}, height: {}, weight: {}, color: {:?}",
