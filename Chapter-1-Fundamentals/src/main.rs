@@ -307,10 +307,15 @@ mod data_collections_activity {
     }
 
     #[derive(Debug)]
-    pub struct ShippingBox {
+    pub struct Dimensions {
         pub width: u32,
         pub height: u32,
         pub weight: u32,
+    }
+
+    #[derive(Debug)]
+    pub struct ShippingBox {
+        pub dimensions: Dimensions,
         pub color: Color,
     }
 
@@ -319,9 +324,11 @@ mod data_collections_activity {
         // create a new shipping box
         pub fn new(width: u32, height: u32, weight: u32, color: Color) -> Self {
             Self {
-                width,
-                height,
-                weight,
+                dimensions: Dimensions {
+                    width,
+                    height,
+                    weight,
+                },
                 color,
             }
         }
@@ -339,9 +346,9 @@ mod data_collections_activity {
         pub fn print_box(&self) {
             println!(
                 "width: {}, height: {}, weight: {}, color: {:?}",
-                self.width,
-                self.height,
-                self.weight,
+                self.dimensions.width,
+                self.dimensions.height,
+                self.dimensions.weight,
                 self.color
             );
         }
