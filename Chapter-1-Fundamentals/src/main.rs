@@ -296,6 +296,22 @@ mod data_collections {
             &self.drink_type
         }
     }
+
+    // vectors
+    pub fn vectors() {
+        let mut v = vec![1, 2, 3, 4, 5];
+        v.push(6);
+        v.push(7);
+        v.push(8);
+        v.push(9);
+        v.push(10);
+
+        println!("v: {:?}", v);
+        v.pop(); // remove last element
+        println!("v: {:?}", v);
+        v.remove(0); // remove element at index 0
+        println!("v: {:?}", v);
+    }
 }
 
 mod data_collections_activity {
@@ -453,4 +469,7 @@ fn main() {
     box1.print_box();
     box1.set_color(data_collections_activity::Color::Green);
     box1.print_box();
+
+    // vectors
+    data_collections::vectors();
 }
