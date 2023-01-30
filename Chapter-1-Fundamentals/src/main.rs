@@ -390,6 +390,22 @@ mod data_collections_activity {
     }
 }
 
+mod vectors_activity {
+    pub fn run() {
+        let mut vect = vec![10, 20, 30, 40];
+        for i in &vect {
+            match i {
+                10 => println!("10"),
+                20 => println!("20"),
+                30 => println!("thirty"),
+                40 => println!("40"),
+                _ => println!("not found"),
+            }
+        }
+        println!("vect length: {:?}", vect.len());
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -492,4 +508,7 @@ fn main() {
     // vectors
     data_collections::vectors();
     data_collections::show_tests();
+
+    // vectors activity
+    vectors_activity::run();
 }
