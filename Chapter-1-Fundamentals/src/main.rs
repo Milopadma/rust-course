@@ -312,6 +312,25 @@ mod data_collections {
         v.remove(0); // remove element at index 0
         println!("v: {:?}", v);
     }
+
+    struct Test {
+        score: i32,
+    }
+
+    pub fn show_tests() {
+        let Scores = vec![
+            Test {
+                score: 1,
+            },
+            Test {
+                score: 2,
+            }
+        ];
+
+        for tests in Scores {
+            println!("score: {}", tests.score);
+        }
+    }
 }
 
 mod data_collections_activity {
@@ -472,4 +491,5 @@ fn main() {
 
     // vectors
     data_collections::vectors();
+    data_collections::show_tests();
 }
