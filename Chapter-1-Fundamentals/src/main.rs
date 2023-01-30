@@ -392,7 +392,7 @@ mod data_collections_activity {
 
 mod vectors_activity {
     pub fn run() {
-        let mut vect = vec![10, 20, 30, 40];
+        let vect = vec![10, 20, 30, 40];
         for i in &vect {
             match i {
                 10 => println!("10"),
