@@ -476,13 +476,15 @@ mod advanced_match_activity {
 mod options_activity {
     struct Student {
         name: String,
-        locker: Option<u32>,
+        locker: Option<u32>, // some students dont have a locker
     }
 
+    /// this function shows how to use the Option enum
     pub fn run() {
-        let mut vect = vec![
+        let vect = vec![
             Student {
                 name: String::from("John"),
+                /// turns the string slice into a String
                 locker: Some(1),
             },
             Student {
@@ -501,6 +503,13 @@ mod options_activity {
                 None => println!("{} has no locker", student.name),
             }
         }
+    }
+}
+
+mod standard_library_activity {
+    pub fn print_string(str: &str) {
+        println!("{}", str.to_lowercase());
+        println!("{}", str.to_uppercase());
     }
 }
 
@@ -618,4 +627,7 @@ fn main() {
 
     // options activity
     options_activity::run();
+
+    // standard library activity
+    standard_library_activity::print_string("Hello World!");
 }
