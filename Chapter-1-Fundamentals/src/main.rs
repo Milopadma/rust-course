@@ -406,6 +406,46 @@ mod vectors_activity {
     }
 }
 
+// strings and &str
+// String is a heap allocated data structure,
+// &str is a slice of a string that is stored on the stack
+
+mod strings_activity {
+    struct Person {
+        name: String,
+        age: u32,
+        color: String,
+    }
+
+    pub fn run() {
+        let person_1 = Person {
+            name: String::from("John"),
+            age: 20,
+            color: String::from("blue"),
+        };
+
+        let person_2 = Person {
+            name: String::from("Jane"),
+            age: 20,
+            color: String::from("blue"),
+        };
+
+        let person_3 = Person {
+            name: String::from("Janni"),
+            age: 22,
+            color: String::from("red"),
+        };
+
+        let vect = vec![person_1, person_2, person_3];
+
+        for person in &vect {
+            if person.name == "John" {
+                println!("{} {} {}", person.name, person.age, person.color);
+            }
+        }
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -511,4 +551,7 @@ fn main() {
 
     // vectors activity
     vectors_activity::run();
+
+    // strings and &str
+    strings_activity::run();
 }
