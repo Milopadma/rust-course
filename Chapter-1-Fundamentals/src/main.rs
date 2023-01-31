@@ -420,26 +420,26 @@ mod strings_activity {
     pub fn run() {
         let person_1 = Person {
             name: String::from("John"),
-            age: 20,
+            age: 12,
             color: String::from("blue"),
         };
 
         let person_2 = Person {
             name: String::from("Jane"),
-            age: 20,
+            age: 9,
             color: String::from("blue"),
         };
 
         let person_3 = Person {
             name: String::from("Janni"),
-            age: 22,
+            age: 10,
             color: String::from("red"),
         };
 
         let vect = vec![person_1, person_2, person_3];
 
         for person in &vect {
-            if person.name == "John" {
+            if person.age <= 10 {
                 println!("{} {} {}", person.name, person.age, person.color);
             }
         }
