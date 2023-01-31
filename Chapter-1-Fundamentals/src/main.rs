@@ -447,7 +447,7 @@ mod strings_activity {
 }
 
 mod advanced_match_activity {
-    // skips using a struct
+    // for when some variants have different types of data
     #[derive(Debug)]
     enum Ticket {
         Standard(f64),
