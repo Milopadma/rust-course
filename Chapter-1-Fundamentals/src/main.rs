@@ -473,6 +473,37 @@ mod advanced_match_activity {
     }
 }
 
+mod options_activity {
+    struct Student {
+        name: String,
+        locker: Option<u32>,
+    }
+
+    pub fn run() {
+        let mut vect = vec![
+            Student {
+                name: String::from("John"),
+                locker: Some(1),
+            },
+            Student {
+                name: String::from("Jane"),
+                locker: None,
+            },
+            Student {
+                name: String::from("Janni"),
+                locker: Some(2),
+            }
+        ];
+
+        for student in vect {
+            match student.locker {
+                Some(locker) => println!("{} has a locker at {}", student.name, locker),
+                None => println!("{} has no locker", student.name),
+            }
+        }
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -584,4 +615,7 @@ fn main() {
 
     // advanced match activity
     advanced_match_activity::run();
+
+    // options activity
+    options_activity::run();
 }
