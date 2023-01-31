@@ -449,7 +449,7 @@ mod strings_activity {
 mod advanced_match_activity {
     // skips using a struct
     #[derive(Debug)]
-    enum TicketType {
+    enum Ticket {
         Standard(f64),
         Vip(f64, String),
         Backstage(f64, String),
@@ -457,16 +457,16 @@ mod advanced_match_activity {
 
     pub fn run() {
         let vect = vec![
-            TicketType::Standard(10.0),
-            TicketType::Vip(20.0, String::from("John")),
-            TicketType::Backstage(30.0, String::from("Jonnie"))
+            Ticket::Standard(10.0),
+            Ticket::Vip(20.0, String::from("John")),
+            Ticket::Backstage(30.0, String::from("Jonnie"))
         ];
         for ticket in vect {
             match ticket {
-                TicketType::Standard(price) => println!("Standard ticket, price: {}", price),
-                TicketType::Vip(price, name) =>
+                Ticket::Standard(price) => println!("Standard ticket, price: {}", price),
+                Ticket::Vip(price, name) =>
                     println!("VIP ticket, price: {}, name: {}", price, name),
-                TicketType::Backstage(price, name) =>
+                Ticket::Backstage(price, name) =>
                     println!("Backstage ticket, price: {}, name: {}", price, name),
             }
         }
