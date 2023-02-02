@@ -10,7 +10,11 @@ fn add_generic<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 
 // if statements
 fn if_statements(a: i32, b: i32) -> i32 {
-    if a > b { a } else { b }
+    if a > b {
+        a
+    } else {
+        b
+    }
 }
 
 // loop
@@ -57,7 +61,8 @@ enum Color {
     Blue,
 }
 
-enum Drinks { // enumerations, variants of this data type
+enum Drinks {
+    // enumerations, variants of this data type
     Cola,
     Sprite,
     Fanta,
@@ -90,7 +95,8 @@ struct ShippingBox {
     depth: u32,
 }
 
-struct Drink { // drink struct, shows what types of data this struct can hold
+struct Drink {
+    // drink struct, shows what types of data this struct can hold
     price: f64,
     size: u32,
     drink_type: Drinks,
@@ -119,13 +125,18 @@ fn cartesian_check(x: i32, y: i32) -> (i32, i32) {
 
 // print out the Drink
 fn print_drink(d: Drink) {
-    println!("{}, {}, {}", d.price, d.size, match d.drink_type {
-        // match returns a string  implicitly
-        Drinks::Cola => "Cola",
-        Drinks::Sprite => "Sprite",
-        Drinks::Fanta => "Fanta",
-        Drinks::Milo => "Milo",
-    });
+    println!(
+        "{}, {}, {}",
+        d.price,
+        d.size,
+        match d.drink_type {
+            // match returns a string  implicitly
+            Drinks::Cola => "Cola",
+            Drinks::Sprite => "Sprite",
+            Drinks::Fanta => "Fanta",
+            Drinks::Milo => "Milo",
+        }
+    );
 }
 
 // using the struct
@@ -142,9 +153,7 @@ fn struct_use() {
     println!("a: {}, b: {}", s.a, s.b);
     println!(
         "width: {}, height: {}, depth: {}",
-        shipping_box.width,
-        shipping_box.height,
-        shipping_box.depth
+        shipping_box.width, shipping_box.height, shipping_box.depth
     );
 }
 mod expressions {
@@ -271,7 +280,8 @@ mod data_collections {
     }
 
     #[derive(Debug)]
-    pub struct Drink { // drink struct, shows what types of data this struct can hold
+    pub struct Drink {
+        // drink struct, shows what types of data this struct can hold
         price: f64,
         size: u32,
         drink_type: Drinks,
@@ -318,14 +328,7 @@ mod data_collections {
     }
 
     pub fn show_tests() {
-        let Scores = vec![
-            Test {
-                score: 1,
-            },
-            Test {
-                score: 2,
-            }
-        ];
+        let Scores = vec![Test { score: 1 }, Test { score: 2 }];
 
         for tests in Scores {
             println!("score: {}", tests.score);
@@ -381,10 +384,7 @@ mod data_collections_activity {
         pub fn print_box(&self) {
             println!(
                 "width: {}, height: {}, weight: {}, color: {:?}",
-                self.dimensions.width,
-                self.dimensions.height,
-                self.dimensions.weight,
-                self.color
+                self.dimensions.width, self.dimensions.height, self.dimensions.weight, self.color
             );
         }
     }
@@ -459,15 +459,17 @@ mod advanced_match_activity {
         let vect = vec![
             Ticket::Standard(10.0),
             Ticket::Vip(20.0, String::from("John")),
-            Ticket::Backstage(30.0, String::from("Jonnie"))
+            Ticket::Backstage(30.0, String::from("Jonnie")),
         ];
         for ticket in vect {
             match ticket {
                 Ticket::Standard(price) => println!("Standard ticket, price: {}", price),
-                Ticket::Vip(price, name) =>
-                    println!("VIP ticket, price: {}, name: {}", price, name),
-                Ticket::Backstage(price, name) =>
-                    println!("Backstage ticket, price: {}, name: {}", price, name),
+                Ticket::Vip(price, name) => {
+                    println!("VIP ticket, price: {}, name: {}", price, name);
+                }
+                Ticket::Backstage(price, name) => {
+                    println!("Backstage ticket, price: {}, name: {}", price, name);
+                }
             }
         }
     }
@@ -494,7 +496,7 @@ mod options_activity {
             Student {
                 name: String::from("Janni"),
                 locker: Some(2),
-            }
+            },
         ];
 
         for student in vect {
@@ -510,6 +512,38 @@ mod standard_library_activity {
     pub fn print_string(str: &str) {
         println!("{}", str.to_lowercase());
         println!("{}", str.to_uppercase());
+    }
+}
+
+mod result_enum_activity {
+    struct Customer {
+        name: String,
+        age: u32,
+    }
+
+    fn can_purchase(customer: &Customer) -> Result<(String), String> {
+        if customer.age >= 18 {
+            Ok(String::from("Customer is old enough"))
+        } else {
+            Err(String::from("Customer is not old enough"))
+        }
+    }
+
+    pub fn run() {
+        let customer_1 = Customer {
+            name: String::from("John"),
+            age: 12,
+        };
+
+        let customer_2 = Customer {
+            name: String::from("Jane"),
+            age: 20,
+        };
+
+        println! {"{:?}, {:?}", customer_1.name, can_purchase(&customer_1).unwrap_err()
+        }
+        println! {"{:?}, {:?}", customer_2.name, can_purchase(&customer_2).unwrap()
+        }
     }
 }
 
@@ -589,10 +623,7 @@ fn main() {
     ownership_example_2::run();
 
     // ownership activity
-    let item = ownership_activity::GroceryItem {
-        quantity: 5,
-        id: 2,
-    };
+    let item = ownership_activity::GroceryItem { quantity: 5, id: 2 };
     ownership_activity::show_quantity(&item);
     ownership_activity::show_id(&item);
 
@@ -602,12 +633,8 @@ fn main() {
     println!("drink type: {:?}", drink.get_drink_type());
 
     // data collections activity
-    let mut box1 = data_collections_activity::ShippingBox::new(
-        1,
-        2,
-        3,
-        data_collections_activity::Color::Red
-    );
+    let mut box1 =
+        data_collections_activity::ShippingBox::new(1, 2, 3, data_collections_activity::Color::Red);
     box1.print_box();
     box1.set_color(data_collections_activity::Color::Green);
     box1.print_box();
@@ -630,4 +657,7 @@ fn main() {
 
     // standard library activity
     standard_library_activity::print_string("Hello World!");
+
+    // result enum activity
+    result_enum_activity::run();
 }
