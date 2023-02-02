@@ -568,7 +568,7 @@ mod results_question_mark_activity {
         employee_type: EmployeeType,
     }
 
-    fn can_enter_building(employee: &Employee) -> Result<bool, String> {
+    fn can_enter_building(employee: &Employee) -> Result<&Employee, String> {
         // early return if the employee is not employed
         match employee.is_employed {
             EmployeeStatus::Unemployed => return Err(String::from("Employee cannot enter")),
@@ -576,21 +576,20 @@ mod results_question_mark_activity {
         };
         // if the employee is employed, check if they are of the correct type
         match employee.employee_type {
-            EmployeeType::MaintainanceCrew => Ok(true),
-            EmployeeType::MarketingDepartment => Ok(true),
-            EmployeeType::Manager => Ok(true),
+            EmployeeType::MaintainanceCrew => Ok(employee),
+            EmployeeType::MarketingDepartment => Ok(employee),
+            EmployeeType::Manager => Ok(employee),
             _ => Err(String::from("Employee cannot enter")),
         }
     }
 
-    fn try_access(employee: &Employee) -> Result<String, String> {
-        let result: bool = can_enter_building(employee)?; // this is the same as can_enter_building(employee).unwrap(), as it may return an error, it will return the error, otherwise it will return the value of the Ok variant
-                                                          // returns the value of the Ok variant
-        if result {
-            Ok(String::from("Employee can enter"))
-        } else {
-            Err(String::from("Employee cannot enter"))
-        }
+    fn try_access(employee: &Employee) -> Result<(), String> {
+        let result: &Employee = can_enter_building(employee)?; // this is the same as can_enter_building(employee).unwrap(), as it may return an error, it will return the error, otherwise it will return the value of the Ok variant
+                                                               // returns the value of the Ok variant
+        println!("Employee {:?} can enter", result.name);
+        Ok(())
+
+        // in this case, the Err variant is never printed
     }
     pub fn run() {
         let employee_1 = Employee {
@@ -611,14 +610,9 @@ mod results_question_mark_activity {
             is_employed: EmployeeStatus::Employed,
         };
 
-        println! {"{:?}, {:?}", employee_1.name, try_access(&employee_1)
-        }
-
-        println! {"{:?}, {:?}", employee_2.name, try_access(&employee_2)
-        }
-
-        println! {"{:?}, {:?}", employee_3.name, try_access(&employee_3)
-        }
+        try_access(&employee_1).unwrap();
+        try_access(&employee_2).unwrap_err();
+        try_access(&employee_3).unwrap_err();
     }
 }
 
