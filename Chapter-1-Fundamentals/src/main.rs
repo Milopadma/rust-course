@@ -547,6 +547,81 @@ mod result_enum_activity {
     }
 }
 
+mod results_question_mark_activity {
+    enum EmployeeType {
+        MaintainanceCrew,
+        MarketingDepartment,
+        Manager,
+        LineSupervisor,
+        KitchenStaff,
+        AssemblyTechnician,
+    }
+
+    enum EmployeeStatus {
+        Employed,
+        Unemployed,
+    }
+
+    struct Employee {
+        name: String,
+        is_employed: EmployeeStatus,
+        employee_type: EmployeeType,
+    }
+
+    fn can_enter_building(employee: &Employee) -> Result<bool, String> {
+        // early return if the employee is not employed
+        match employee.is_employed {
+            EmployeeStatus::Unemployed => return Err(String::from("Employee cannot enter")),
+            _ => (), // if the employee is employed, continue
+        };
+        // if the employee is employed, check if they are of the correct type
+        match employee.employee_type {
+            EmployeeType::MaintainanceCrew => Ok(true),
+            EmployeeType::MarketingDepartment => Ok(true),
+            EmployeeType::Manager => Ok(true),
+            _ => Err(String::from("Employee cannot enter")),
+        }
+    }
+
+    fn try_access(employee: &Employee) -> Result<String, String> {
+        let result: bool = can_enter_building(employee)?; // this is the same as can_enter_building(employee).unwrap(), as it may return an error, it will return the error, otherwise it will return the value of the Ok variant
+                                                          // returns the value of the Ok variant
+        if result {
+            Ok(String::from("Employee can enter"))
+        } else {
+            Err(String::from("Employee cannot enter"))
+        }
+    }
+    pub fn run() {
+        let employee_1 = Employee {
+            name: String::from("John"),
+            employee_type: EmployeeType::MaintainanceCrew,
+            is_employed: EmployeeStatus::Employed,
+        };
+
+        let employee_2 = Employee {
+            name: String::from("Jane"),
+            employee_type: EmployeeType::MarketingDepartment,
+            is_employed: EmployeeStatus::Unemployed,
+        };
+
+        let employee_3 = Employee {
+            name: String::from("Janni"),
+            employee_type: EmployeeType::KitchenStaff,
+            is_employed: EmployeeStatus::Employed,
+        };
+
+        println! {"{:?}, {:?}", employee_1.name, try_access(&employee_1)
+        }
+
+        println! {"{:?}, {:?}", employee_2.name, try_access(&employee_2)
+        }
+
+        println! {"{:?}, {:?}", employee_3.name, try_access(&employee_3)
+        }
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -660,4 +735,7 @@ fn main() {
 
     // result enum activity
     result_enum_activity::run();
+
+    // results question mark activity
+    results_question_mark_activity::run();
 }
