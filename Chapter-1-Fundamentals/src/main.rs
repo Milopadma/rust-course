@@ -675,7 +675,11 @@ mod hash_maps_activity {
 
         // print the amount of each furniture
         for (key, value) in &stock {
-            println!("key-{} {}: {}", key, value.name, value.amount);
+            if value.amount == 0 {
+                println!("{} is out of stock", value.name);
+            } else {
+                println!("key-{} {}: {}", key, value.name, value.amount);
+            }
         }
 
         // prints the total furniture stock
