@@ -616,6 +616,79 @@ mod results_question_mark_activity {
     }
 }
 
+mod hash_maps_activity {
+    enum FurnitureType {
+        Chair,
+        Table,
+        Couch,
+        Bed,
+    }
+    struct Furniture {
+        name: String,
+        amount: i32,
+        price: f64,
+        furniture_type: FurnitureType,
+    }
+
+    pub fn run() {
+        let mut stock: std::collections::HashMap<i32, Furniture> = std::collections::HashMap::new();
+
+        stock.insert(
+            1,
+            Furniture {
+                name: String::from("Chair"),
+                amount: 5,
+                price: 10.0,
+                furniture_type: FurnitureType::Chair,
+            },
+        );
+
+        stock.insert(
+            2,
+            Furniture {
+                name: String::from("Table"),
+                amount: 2,
+                price: 20.0,
+                furniture_type: FurnitureType::Table,
+            },
+        );
+
+        stock.insert(
+            3,
+            Furniture {
+                name: String::from("Couch"),
+                amount: 0,
+                price: 50.0,
+                furniture_type: FurnitureType::Couch,
+            },
+        );
+
+        stock.insert(
+            4,
+            Furniture {
+                name: String::from("Bed"),
+                amount: 3,
+                price: 100.0,
+                furniture_type: FurnitureType::Bed,
+            },
+        );
+
+        // print the amount of each furniture
+        for (key, value) in &stock {
+            println!("key-{} {}: {}", key, value.name, value.amount);
+        }
+
+        // prints the total furniture stock
+        println!(
+            "total stock: {}",
+            // takes the values of the hashmap, and for each value, adds the amount to the accumulator
+            stock
+                .values()
+                .fold(0, |accumulator, furniture| accumulator + furniture.amount)
+        );
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -732,4 +805,7 @@ fn main() {
 
     // results question mark activity
     results_question_mark_activity::run();
+
+    // hash maps activity
+    hash_maps_activity::run();
 }
