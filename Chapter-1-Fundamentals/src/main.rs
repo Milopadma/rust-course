@@ -693,6 +693,38 @@ mod hash_maps_activity {
     }
 }
 
+mod map_combinator_activity {
+    #[derive(Debug)]
+    struct User {
+        user_id: i32,
+        name: String,
+    }
+
+    fn find_user(name: &str) -> Option<i32> {
+        let name = name.to_lowercase();
+        match name.as_str() {
+            "sam" => Some(1),
+            "matt" => Some(5),
+            "katie" => Some(9),
+            _ => None,
+        }
+    }
+
+    pub fn run() {
+        // if the user is found, create a user struct
+        let user = find_user("sam").map(|user_id| User {
+            user_id,
+            name: String::from("sam"),
+        });
+
+        // print the user if the struct exists
+        match user {
+            Some(user) => println!("user: {:?}", user),
+            None => println!("user not found"),
+        }
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -812,4 +844,7 @@ fn main() {
 
     // hash maps activity
     hash_maps_activity::run();
+
+    // map combinator activity
+    map_combinator_activity::run();
 }
