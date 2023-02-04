@@ -753,7 +753,7 @@ mod option_combinator_activity {
 
     pub fn part_2() -> Option<Access> {
         // returns the Option enum if the value is Some, otherwise it returns the value of the or_else function
-        maybe_access("sam").or_else(|| maybe_access("matt"))
+        maybe_access("sam").or_else(|| root())
     }
 
     pub fn part_3() -> Access {
