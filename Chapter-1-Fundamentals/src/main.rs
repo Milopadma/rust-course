@@ -725,6 +725,44 @@ mod map_combinator_activity {
     }
 }
 
+mod option_combinator_activity {
+    #[derive(Debug)]
+    pub enum Access {
+        Admin,
+        User,
+        Guest,
+    }
+
+    fn maybe_access(name: &str) -> Option<Access> {
+        let name = name.to_lowercase();
+        match name.as_str() {
+            "sam" => Some(Access::Admin),
+            "matt" => Some(Access::User),
+            "katie" => Some(Access::Guest),
+            _ => None,
+        }
+    }
+
+    fn root() -> Option<Access> {
+        Some(Access::Admin)
+    }
+
+    pub fn part_1() -> bool {
+        maybe_access("sam").is_some()
+    }
+
+    pub fn part_2() -> Option<Access> {
+        // returns the Option enum if the value is Some, otherwise it returns the value of the or_else function
+        maybe_access("sam").or_else(|| maybe_access("matt"))
+    }
+
+    pub fn part_3() -> Access {
+        // unwraps the Option enum and returns the value of the Some variant,
+        // or just return Guest if the value is None
+        maybe_access("alice").unwrap_or(Access::Guest)
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -847,4 +885,9 @@ fn main() {
 
     // map combinator activity
     map_combinator_activity::run();
+
+    // option combinator activity
+    println!("part 1: {}", option_combinator_activity::part_1());
+    println!("part 2: {:?}", option_combinator_activity::part_2());
+    println!("part 3: {:?}", option_combinator_activity::part_3());
 }
