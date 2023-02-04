@@ -763,6 +763,26 @@ mod option_combinator_activity {
     }
 }
 
+mod iterator_activity {
+    pub fn run() {
+        let mut foobar = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        // to triple each item
+        let mut tripled: Vec<i32> = foobar.iter().map(|x| x * 3).collect();
+
+        // to filter
+        let mut filtered: Vec<i32> = foobar.into_iter().filter(|x| x > &10).collect();
+
+        for i in tripled {
+            println!("{}", i);
+        }
+
+        for i in filtered {
+            println!("{}", i);
+        }
+    }
+}
+
 fn main() {
     println!("wow!");
     println!("this chapter is mostly the basics about data types, variables and functions...");
@@ -890,4 +910,8 @@ fn main() {
     println!("part 1: {}", option_combinator_activity::part_1());
     println!("part 2: {:?}", option_combinator_activity::part_2());
     println!("part 3: {:?}", option_combinator_activity::part_3());
+
+    // iterator activity
+    iterator_activity::run();
+    
 }
