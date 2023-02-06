@@ -1,3 +1,5 @@
+pub mod bill_manager;
+
 // i32 type addition
 fn add(a: i32, b: i32) -> i32 {
     a + b
@@ -959,4 +961,7 @@ fn main() {
 
     // user input activity
     user_input_activity::run();
+
+    // import bill_manager.rs from the src folder
+    bill_manager::bill_manager_project::run();
 }
