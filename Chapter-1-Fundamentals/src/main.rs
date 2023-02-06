@@ -765,13 +765,13 @@ mod option_combinator_activity {
 
 mod iterator_activity {
     pub fn run() {
-        let mut foobar = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let foobar = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
         // to triple each item
-        let mut tripled: Vec<i32> = foobar.iter().map(|x| x * 3).collect();
+        let tripled: Vec<i32> = foobar.iter().map(|x| x * 3).collect();
 
         // to filter
-        let mut filtered: Vec<i32> = foobar.into_iter().filter(|x| x > &10).collect();
+        let filtered: Vec<i32> = foobar.into_iter().filter(|x| x > &10).collect();
 
         for i in tripled {
             println!("{}", i);
@@ -780,6 +780,49 @@ mod iterator_activity {
         for i in filtered {
             println!("{}", i);
         }
+    }
+}
+
+mod user_input_activity {
+    use std::io;
+    enum PowerOptions {
+        Off,
+        Sleep,
+        Reboot,
+        Shutdown,
+        Hibernate,
+    }
+
+    fn convert(input: &str) -> Result<PowerOptions, String> {
+        match input {
+            "off" => Ok(PowerOptions::Off),
+            "sleep" => Ok(PowerOptions::Sleep),
+            "reboot" => Ok(PowerOptions::Reboot),
+            "shutdown" => Ok(PowerOptions::Shutdown),
+            "hibernate" => Ok(PowerOptions::Hibernate),
+            _ => return Err("Invalid input".to_string()),
+        }
+    }
+
+    fn print(input: Result<PowerOptions, String>) {
+        match input {
+            Ok(PowerOptions::Off) => println!("Turning off..."),
+            Ok(PowerOptions::Sleep) => println!("Sleeping..."),
+            Ok(PowerOptions::Reboot) => println!("Rebooting..."),
+            Ok(PowerOptions::Shutdown) => println!("Shutting down..."),
+            Ok(PowerOptions::Hibernate) => println!("Hibernating..."),
+            Err(e) => println!("{}", e),
+        }
+    }
+
+    pub fn run() {
+        let mut input_buffer = String::new();
+        println!("Enter a power option: ");
+        io::stdin()
+            .read_line(&mut input_buffer)
+            .expect("Failed to read line");
+        let converted = convert(&input_buffer.to_lowercase().trim());
+        print(converted);
     }
 }
 
@@ -913,5 +956,7 @@ fn main() {
 
     // iterator activity
     iterator_activity::run();
-    
+
+    // user input activity
+    user_input_activity::run();
 }
