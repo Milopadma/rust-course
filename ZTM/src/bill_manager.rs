@@ -2,7 +2,7 @@ pub mod bill_manager_project {
 
     pub struct User {
         pub bills: Vec<Bill>,
-        pub add_bill: fn(&mut User, Bill),
+        pub add_bill: fn(User) -> User,
         pub print_bills: fn(&User),
     }
 
@@ -14,7 +14,7 @@ pub mod bill_manager_project {
 
     // impl both add_bill and print_bills for User struct
     impl User {
-        pub fn add_bill(&self) {
+        pub fn add_bill(mut self) -> User {
             println!("Enter bill name: ");
             let mut bill_name = String::new();
             std::io::stdin()
@@ -61,7 +61,11 @@ pub mod bill_manager_project {
 
             // clear the screen
             print!("{}[2J", 27 as char);
+
+            // return the user
+            return self;
         }
+
         pub fn print_bills(&self) {
             // check if there are any
             if self.bills.len() == 0 {
@@ -78,14 +82,15 @@ pub mod bill_manager_project {
     }
 
     pub fn run() {
-        loop {
-            // generate the user
-            let mut user = User {
-                bills: Vec::new(),
-                add_bill: User::add_bill,
-                print_bills: User::print_bills,
-            };
+        // generate the user
+        let mut user = User {
+            bills: Vec::new(),
+            add_bill: User::add_bill as fn(User) -> User,
+            print_bills: User::print_bills as fn(&User),
+        };
 
+        // ugh -> bug was creating new user objects everytime restarted 
+        loop {
             // the default welcome screen for ALL users
             println!("Welcome to Bill Manager");
             println!("1. Add Bill");
@@ -107,10 +112,23 @@ pub mod bill_manager_project {
 
             // match the choice
             match choice {
-                1 => user.add_bill(),
-                2 => user.print_bills(),
-                3 => break,
-                _ => continue,
+                1 => {
+                    // add bill
+                    user = (user.add_bill)(user);
+                }
+                2 => {
+                    // print bills
+                    (user.print_bills)(&user);
+                }
+                3 => {
+                    // exit
+                    println!("Exiting...");
+                    break;
+                }
+                _ => {
+                    // invalid choice
+                    println!("Invalid choice");
+                }
             }
         }
     }
