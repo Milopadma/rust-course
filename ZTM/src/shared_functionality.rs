@@ -24,7 +24,8 @@ mod traits_activity {
         }
     }
 
-    pub fn print_area<T: Calculate>(shape: T) {
+    #[allow(dead_code)]
+    fn print_area<T: Calculate>(shape: T) {
         println!("The area is {}", shape.calculate());
     }
 
