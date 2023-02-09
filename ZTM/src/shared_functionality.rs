@@ -27,15 +27,19 @@ mod traits_activity {
     pub fn print_area<T: Calculate>(shape: T) {
         println!("The area is {}", shape.calculate());
     }
+
+    pub fn run() {
+        let square = Square { side: 5 };
+        let triangle = Triangle {
+            length: 5,
+            width: 5,
+        };
+
+        print_area(square);
+        print_area(triangle);
+    }
 }
 
 fn main() {
-    let square = traits_activity::Square { side: 5 };
-    let triangle = traits_activity::Triangle {
-        length: 5,
-        width: 5,
-    };
-
-    traits_activity::print_area(square);
-    traits_activity::print_area(triangle);
+    traits_activity::run();
 }
