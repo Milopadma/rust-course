@@ -52,6 +52,7 @@ mod generic_functions_activity {
         fn get_priority(&self) -> ServicePriority;
     }
 
+    // a show case of mono morphism
     #[derive(Debug)]
     struct ImportantGuest;
     impl Priority for ImportantGuest {
@@ -79,7 +80,9 @@ mod generic_functions_activity {
     }
 }
 
+
+
 fn main() {
-    traits_activity::run(); 
+    traits_activity::run();
     generic_functions_activity::run();
 }
