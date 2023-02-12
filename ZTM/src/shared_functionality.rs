@@ -41,6 +41,45 @@ mod traits_activity {
     }
 }
 
+mod generic_functions_activity {
+    #[derive(Debug)]
+    enum ServicePriority {
+        High,
+        Standard,
+    }
+
+    trait Priority {
+        fn get_priority(&self) -> ServicePriority;
+    }
+
+    #[derive(Debug)]
+    struct ImportantGuest;
+    impl Priority for ImportantGuest {
+        fn get_priority(&self) -> ServicePriority {
+            ServicePriority::High
+        }
+    }
+
+    struct Guest;
+    impl Priority for Guest {
+        fn get_priority(&self) -> ServicePriority {
+            ServicePriority::Standard
+        }
+    }
+
+    fn print_guest_priority<T: Priority>(guest: T) {
+        println!("Guest priority: {:?}", guest.get_priority());
+    }
+
+    pub fn run() {
+        let guest = ImportantGuest;
+        let guest2 = Guest;
+
+        print_guest_priority(guest);
+    }
+}
+
 fn main() {
-    traits_activity::run();
+    traits_activity::run(); 
+    generic_functions_activity::run();
 }
