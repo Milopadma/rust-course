@@ -80,9 +80,74 @@ mod generic_functions_activity {
     }
 }
 
+mod generic_structures_activity {
+    trait Body {
+        fn get_body(&self) -> String;
+    }
 
+    trait Color {
+        fn get_color(&self) -> String;
+    }
+
+    #[derive(Debug)]
+    struct Vehicle<T: Body, U: Color> {
+        body: T,
+        color: U,
+    }
+
+    // generic implementation for Vehicle struct
+    impl<T: Body, U: Color> Vehicle<T, U> {
+        fn new(body: T, color: U) -> Self {
+            Vehicle { body, color }
+        }
+    }
+    // trait implementation for body struct
+    #[derive(Debug)]
+    struct Car;
+    impl Body for Car {
+        fn get_body(&self) -> String {
+            "car".to_string()
+        }
+    }
+
+    #[derive(Debug)]
+    struct Truck;
+    impl Body for Truck {
+        fn get_body(&self) -> String {
+            "truck".to_string()
+        }
+    }
+
+    // trait implementation for color struct
+    #[derive(Debug)]
+    struct Red;
+    impl Color for Red {
+        fn get_color(&self) -> String {
+            "red".to_string()
+        }
+    }
+
+    #[derive(Debug)]
+    struct Blue;
+    impl Color for Blue {
+        fn get_color(&self) -> String {
+            "blue".to_string()
+        }
+    }
+
+    // trait implementation for Vehicle struct
+
+    pub fn run() {
+        let car = Vehicle::new(Car, Red);
+        let truck = Vehicle::new(Truck, Blue);
+
+        println!("car: {:?}", car);
+        println!("truck: {:?}", truck);
+    }
+}
 
 fn main() {
     traits_activity::run();
     generic_functions_activity::run();
+    generic_structures_activity::run();
 }
