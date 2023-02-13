@@ -81,13 +81,9 @@ mod generic_functions_activity {
 }
 
 mod generic_structures_activity {
-    trait Body {
-        fn get_body(&self) -> String;
-    }
+    trait Body {}
 
-    trait Color {
-        fn get_color(&self) -> String;
-    }
+    trait Color {}
 
     #[derive(Debug)]
     struct Vehicle<T: Body, U: Color> {
@@ -104,36 +100,20 @@ mod generic_structures_activity {
     // trait implementation for body struct
     #[derive(Debug)]
     struct Car;
-    impl Body for Car {
-        fn get_body(&self) -> String {
-            "car".to_string()
-        }
-    }
+    impl Body for Car {}
 
     #[derive(Debug)]
     struct Truck;
-    impl Body for Truck {
-        fn get_body(&self) -> String {
-            "truck".to_string()
-        }
-    }
+    impl Body for Truck {}
 
     // trait implementation for color struct
     #[derive(Debug)]
     struct Red;
-    impl Color for Red {
-        fn get_color(&self) -> String {
-            "red".to_string()
-        }
-    }
+    impl Color for Red {}
 
     #[derive(Debug)]
     struct Blue;
-    impl Color for Blue {
-        fn get_color(&self) -> String {
-            "blue".to_string()
-        }
-    }
+    impl Color for Blue {}
 
     // trait implementation for Vehicle struct
 
