@@ -155,10 +155,25 @@ mod trait_objects {
             20 * sqm as u32
         }
     }
+
+    pub fn run() {
+        let carpet = Carpet {};
+        let tile = Tile {};
+        let wood = Wood {};
+
+        // a vector of dynamic trait objects Boxed up.
+        let materials: Vec<Box<dyn MaterialCost>> =
+            vec![Box::new(carpet), Box::new(tile), Box::new(wood)];
+
+        for material in materials {
+            println!("Cost: {}", material.cost(10));
+        }
+    }
 }
 
 fn main() {
     traits_activity::run();
     generic_functions_activity::run();
     generic_structures_activity::run();
+    trait_objects::run();
 }
