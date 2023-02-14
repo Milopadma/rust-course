@@ -132,7 +132,7 @@ mod trait_objects {
         fn cost(&self, sqm: i32) -> u32;
     }
 
-    struct Carpet {}
+    struct Carpet(f64);
 
     impl MaterialCost for Carpet {
         fn cost(&self, sqm: i32) -> u32 {
@@ -140,7 +140,7 @@ mod trait_objects {
         }
     }
 
-    struct Tile {}
+    struct Tile(f64);
 
     impl MaterialCost for Tile {
         fn cost(&self, sqm: i32) -> u32 {
@@ -148,7 +148,7 @@ mod trait_objects {
         }
     }
 
-    struct Wood {}
+    struct Wood(f64);
 
     impl MaterialCost for Wood {
         fn cost(&self, sqm: i32) -> u32 {
@@ -157,9 +157,9 @@ mod trait_objects {
     }
 
     pub fn run() {
-        let carpet = Carpet {};
-        let tile = Tile {};
-        let wood = Wood {};
+        let carpet = Carpet(10.0);
+        let tile = Tile(10.0);
+        let wood = Wood(10.0);
 
         // a vector of dynamic trait objects Boxed up.
         let materials: Vec<Box<dyn MaterialCost>> =
