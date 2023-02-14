@@ -126,6 +126,37 @@ mod generic_structures_activity {
     }
 }
 
+mod trait_objects {
+
+    trait MaterialCost {
+        fn cost(&self, sqm: i32) -> u32;
+    }
+
+    struct Carpet {}
+
+    impl MaterialCost for Carpet {
+        fn cost(&self, sqm: i32) -> u32 {
+            10 * sqm as u32
+        }
+    }
+
+    struct Tile {}
+
+    impl MaterialCost for Tile {
+        fn cost(&self, sqm: i32) -> u32 {
+            15 * sqm as u32
+        }
+    }
+
+    struct Wood {}
+
+    impl MaterialCost for Wood {
+        fn cost(&self, sqm: i32) -> u32 {
+            20 * sqm as u32
+        }
+    }
+}
+
 fn main() {
     traits_activity::run();
     generic_functions_activity::run();
