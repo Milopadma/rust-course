@@ -171,6 +171,27 @@ mod trait_objects {
     }
 }
 
+mod lifetimes_activity {
+
+    const MOCK_DATA: &'static str = include_str!("../mock_data.txt");
+
+    struct Person {
+        name: String,
+        title: String,
+    }
+
+    fn read() {
+        let data: Vec<_> = MOCK_DATA.split('\n').skip(1).collect::<Vec<&str>>();
+        let names: Vec<_> = data
+            .iter()
+            .filter_map(|line| line.split(',').nth(1))
+            .collect();
+        for n in names.iter() {
+            println!("{}", n);
+        }
+    }
+}
+
 fn main() {
     traits_activity::run();
     generic_functions_activity::run();
