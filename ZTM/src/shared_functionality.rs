@@ -173,24 +173,36 @@ mod trait_objects {
 
 mod lifetimes_activity {
 
-    const MOCK_DATA: &'static str = include_str!("../mock_data.txt");
+    const MOCK_DATA: &'static str = include_str!("mock_data.txt");
 
-    struct Person {
-        name: String,
-        title: String,
+    // the mock data is never copied
+    #[derive(Debug)]
+    pub struct Names<'a> {
+        inner: Vec<&'a str>,
     }
 
-    fn read() {
+    #[derive(Debug)]
+    pub struct Titles<'a> {
+        inner: Vec<&'a str>,
+    }
+
+    pub fn read() -> (Names<'static>, Titles<'static>) {
         let data: Vec<_> = MOCK_DATA.split('\n').skip(1).collect::<Vec<&str>>();
         let names: Vec<_> = data
             .iter()
             .filter_map(|line| line.split(',').nth(1))
             .collect();
 
+        let names = Names { inner: names };
+
         let titles: Vec<_> = data
             .iter()
             .filter_map(|line| line.split(',').nth(4))
             .collect();
+
+        let titles = Titles { inner: titles };
+
+        (names, titles)
     }
 }
 
@@ -199,4 +211,6 @@ fn main() {
     generic_functions_activity::run();
     generic_structures_activity::run();
     trait_objects::run();
+    let (names, titles) = lifetimes_activity::read();
+    println!("names: {:?}, titles: {:?}", names, titles);
 }
