@@ -206,6 +206,16 @@ mod lifetimes_activity {
     }
 }
 
+mod lifetimes_functions_activity {
+    pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+        if x.len() > y.len() {
+            x
+        } else {
+            y
+        }
+    }
+}
+
 fn main() {
     traits_activity::run();
     generic_functions_activity::run();
@@ -213,4 +223,6 @@ fn main() {
     trait_objects::run();
     let (names, titles) = lifetimes_activity::read();
     println!("names: {:?}, titles: {:?}", names, titles);
+    let longest = lifetimes_functions_activity::longest("hello", "world");
+    println!("longest: {}", longest);
 }
