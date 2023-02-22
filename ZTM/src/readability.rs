@@ -62,6 +62,58 @@ mod typestates {
     }
 }
 
+mod match_guards_and_binding {
+    #[derive(Debug)]
+    enum TreasureItem {
+        Gold,
+        SuperPower,
+    }
+
+    // treasure chest contains treasure item type variants
+    #[derive(Debug)]
+    struct TreasureChest {
+        content: TreasureItem,
+        amount: usize,
+    }
+
+    // water struct has a pressure field
+    #[derive(Debug)]
+    struct Pressure(u16);
+
+    // different types of bricks
+    #[derive(Debug)]
+    enum BrickStyle {
+        Dungeon,
+        Gray,
+        Red,
+    }
+
+    #[derive(Debug)]
+    enum Tile {
+        Brick(BrickStyle),
+        Dirt,
+        Grass,
+        Sand,
+        Treasure(TreasureChest),
+        Water(Pressure),
+        Wood,
+    }
+
+    pub fn run() {
+        let mut tile = Tile::Treasure(TreasureChest {
+            content: TreasureItem::Gold,
+            amount: 100,
+        });
+
+        // match guard
+        match tile {
+            // if its a colored brick
+            Tile::Brick(BrickStyle::Dungeon) => println!("Dungeon brick"),
+            Tile::Brick(_) => println!("Brick"),
+        }
+    }
+}
+
 // main
 fn main() {
     typestates::run();
