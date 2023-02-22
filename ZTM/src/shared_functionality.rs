@@ -216,6 +216,7 @@ mod lifetimes_functions_activity {
     }
 }
 
+#[allow(dead_code)]
 fn main() {
     traits_activity::run();
     generic_functions_activity::run();
