@@ -4,6 +4,7 @@ mod typestates {
     struct OnLoading;
     struct Offloading;
     struct AwaitingPickup;
+    #[derive(Debug)]
     struct EndCustody;
 
     // the luggage struct
@@ -51,4 +52,9 @@ mod typestates {
 
         println!("Luggage state: {:?}", luggage.state);
     }
+}
+
+// main
+fn main() {
+    typestates::run();
 }
