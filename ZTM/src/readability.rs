@@ -109,7 +109,9 @@ mod match_guards_and_binding {
         match tile {
             // if its a colored brick
             Tile::Brick(BrickStyle::Dungeon) => println!("Dungeon brick"),
-            Tile::Brick(_) => println!("Color: {:?}", tile),
+            Tile::Brick(brick @ BrickStyle::Gray | brick @ BrickStyle::Red) => {
+                println!("Colored brick: {:?}", brick)
+            }
             // if its water tile
             Tile::Water(Pressure(p)) if p >= 10 => println!("High water pressure"),
             Tile::Water(Pressure(p)) if p <= 10 => println!("Water pressure: {:?}", p),
