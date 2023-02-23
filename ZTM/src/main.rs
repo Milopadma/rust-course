@@ -1,6 +1,7 @@
 pub mod bill_manager;
 mod shared_functionality;
 mod readability;
+mod trytypes;
 
 // i32 type addition
 fn add(a: i32, b: i32) -> i32 {

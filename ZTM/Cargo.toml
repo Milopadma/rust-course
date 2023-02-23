@@ -8,3 +8,5 @@ edition = "2021"
 # to include bill_manager.rs in the module tree
 
 [dependencies]
+rgb = "0.8.36"
+thiserror = "*"
