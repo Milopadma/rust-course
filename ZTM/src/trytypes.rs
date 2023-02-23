@@ -39,6 +39,9 @@ enum RgbError {
 
 #[derive(Debug, Eq, PartialEq)]
 struct Rgb(u8, u8, u8); //tuple struct
+
+// this implements the TryFrom trait for the Rgb struct, to allow for
+// conversion from a &str to an Rgb struct
 impl TryFrom<&str> for Rgb {
     type Error = RgbError;
     fn try_from(hex: &str) -> Result<Self, Self::Error> {
