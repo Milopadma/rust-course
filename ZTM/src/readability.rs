@@ -109,7 +109,20 @@ mod match_guards_and_binding {
         match tile {
             // if its a colored brick
             Tile::Brick(BrickStyle::Dungeon) => println!("Dungeon brick"),
-            Tile::Brick(_) => println!("Brick"),
+            Tile::Brick(_) => println!("Color: {:?}", tile),
+            // if its water tile
+            Tile::Water(Pressure(p)) if p >= 10 => println!("High water pressure"),
+            Tile::Water(Pressure(p)) if p <= 10 => println!("Water pressure: {:?}", p),
+            // if its grass, dirt, sand,
+            Tile::Grass | Tile::Dirt | Tile::Sand => println!("Ground tile"),
+            // if its treasure
+            Tile::Treasure(TreasureChest {
+                content: TreasureItem::Gold,
+                ..
+            }) => {
+                println!("Gold treasure")
+            }
+            _ => println!("Unknown tile"),
         }
     }
 }
