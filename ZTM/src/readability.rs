@@ -129,7 +129,36 @@ mod match_guards_and_binding {
     }
 }
 
+mod slices_activity {
+    fn data() -> &'static [u64] {
+        &[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+
+    pub fn run() {
+        let mut stream = data().chunks(2);
+        for chunks in stream.clone() {
+            // either using ifs
+            if chunks.len() != 2 {
+                println!("Odd chunk: {:?}", chunks);
+            } else {
+                // sum of the two elements
+                println!("{:?}, ", chunks[0] + chunks[1]);
+            }
+            // or
+
+            // utilizing the match
+            match chunks {
+                [a, b] => println!("{:?}, ", a + b),      // double
+                [a] => println!("Odd chunk: {:?}", a),    // single
+                _ => unreachable!("Should never be < 2"), // none
+            }
+        }
+        println!("Done");
+    }
+}
+
 // main
 fn main() {
     typestates::run();
+    slices_activity::run();
 }
