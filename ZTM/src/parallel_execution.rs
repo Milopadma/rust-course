@@ -14,8 +14,28 @@ mod advanced_closures {
     }
 }
 
-mod threads {}
+mod threads {
+    use std::thread;
+
+    pub fn run() {
+        let iterations = 10;
+        let a = thread::spawn(move || {
+            for i in 1..=iterations {
+                println!("A:{}", i);
+            }
+        });
+        let b = thread::spawn(move || {
+            for i in 1..=iterations {
+                println!("B:{}", i);
+            }
+        });
+
+        // a.join();
+        // b.join();
+    }
+}
 
 fn main() {
     advanced_closures::run();
+    threads::run();
 }
