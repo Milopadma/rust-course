@@ -15,7 +15,10 @@ mod advanced_closures {
 }
 
 mod threads {
-    use std::thread;
+    use std::{
+        thread::{self, JoinHandle},
+        time::Duration,
+    };
 
     pub fn run() {
         let iterations = 10;
@@ -30,8 +33,15 @@ mod threads {
             }
         });
 
-        // a.join();
-        // b.join();
+        // thread that returns a value
+        let value: JoinHandle<i32> = thread::spawn(move || {
+            thread::sleep(Duration::from_secs(1));
+            42
+        });
+
+        a.join();
+        b.join();
+        println!("{:?}", value.join());
     }
 }
 
