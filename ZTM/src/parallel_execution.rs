@@ -27,11 +27,13 @@ mod threads {
             let data: Vec<char> = data.iter().map(|c| c.to_ascii_uppercase()).collect();
             data
         });
+
         let a = thread::spawn(move || {
             for i in 1..=iterations {
                 println!("A:{}", i);
             }
         });
+
         let b = thread::spawn(move || {
             for i in 1..=iterations {
                 println!("B:{}", i);
@@ -52,7 +54,53 @@ mod threads {
     }
 }
 
+mod threads_activity {
+    use std::thread;
+
+    fn msg_hello() -> &'static str {
+        use std::time::Duration;
+        std::thread::sleep(Duration::from_millis(1000));
+        "Hello. "
+    }
+
+    fn msg_thread() -> &'static str {
+        use std::time::Duration;
+        std::thread::sleep(Duration::from_millis(1000));
+        "threads, "
+    }
+
+    fn msg_excited() -> &'static str {
+        use std::time::Duration;
+        std::thread::sleep(Duration::from_millis(1000));
+        "!! "
+    }
+
+    pub fn spawn_threads() -> String {
+        // spawns the threads
+        let value_1 = thread::spawn(move || msg_hello());
+        let value_2 = thread::spawn(move || msg_excited());
+        let value_3 = thread::spawn(move || msg_thread());
+
+        // get the data
+        let cat = value_1.join().expect("hu poh");
+        let cat2 = value_2.join().expect("hu poh");
+        let cat3 = value_3.join().expect("hu poh");
+
+        // println
+        // println!("{}{}{}", cat, cat2, cat3);
+
+        // concat and return
+        cat.to_owned() + cat2 + cat3
+    }
+
+    pub fn run() {
+        println!("{:?}", spawn_threads());
+    }
+}
+
 fn main() {
     advanced_closures::run();
     threads::run();
+    threads_activity::run();
+    // threads_activity::spawn_threads();
 }
