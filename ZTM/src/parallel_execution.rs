@@ -22,6 +22,11 @@ mod threads {
 
     pub fn run() {
         let iterations = 10;
+        let data = vec!['a', 'b', 'c'];
+        let caps = thread::spawn(move || {
+            let data: Vec<char> = data.iter().map(|c| c.to_ascii_uppercase()).collect();
+            data
+        });
         let a = thread::spawn(move || {
             for i in 1..=iterations {
                 println!("A:{}", i);
@@ -43,6 +48,7 @@ mod threads {
         a.join();
         b.join();
         println!("{:?}", value.join());
+        println!("{:?}", caps.join());
     }
 }
 
