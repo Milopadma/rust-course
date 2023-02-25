@@ -39,6 +39,7 @@ mod threads {
             42
         });
 
+        // joins returns a Result type
         a.join();
         b.join();
         println!("{:?}", value.join());
