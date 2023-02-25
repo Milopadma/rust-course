@@ -1,6 +1,7 @@
 pub mod bill_manager;
-mod shared_functionality;
+mod parallel_execution;
 mod readability;
+mod shared_functionality;
 mod trytypes;
 
 // i32 type addition
