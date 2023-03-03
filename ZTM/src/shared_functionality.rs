@@ -199,7 +199,6 @@ mod lifetimes_activity {
             .iter()
             .filter_map(|line| line.split(',').nth(4))
             .collect();
-
         let titles = Titles { inner: titles };
 
         (names, titles)

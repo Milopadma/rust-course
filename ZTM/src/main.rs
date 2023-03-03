@@ -3,6 +3,7 @@ mod parallel_execution;
 mod readability;
 mod shared_functionality;
 mod trytypes;
+mod channels_activity;
 
 // i32 type addition
 fn add(a: i32, b: i32) -> i32 {
