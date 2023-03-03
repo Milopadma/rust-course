@@ -55,7 +55,6 @@ mod shared_mutability_ref_cells {
             person.name.replace("peepoo".to_owned());
         }
 
-
         // OR use do a checked borrow using Result
         let new_name: Result<_, _> = person.name.try_borrow();
         match new_name {
@@ -66,7 +65,7 @@ mod shared_mutability_ref_cells {
                 println!("{:?}", e);
             }
         }
-        // 
+        //
         let new_name_mut: Result<_, _> = person.name.try_borrow_mut();
         match new_name_mut {
             Ok(name) => {
@@ -76,7 +75,6 @@ mod shared_mutability_ref_cells {
                 println!("{:?}", e);
             }
         }
-
     }
 }
 
