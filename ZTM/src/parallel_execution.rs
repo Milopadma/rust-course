@@ -82,7 +82,7 @@ mod threads_activity {
         let value_3 = thread::spawn(move || msg_thread());
 
         // get the data
-        let cat = value_1.join().expect("hu poh");
+        let cat1 = value_1.join().expect("hu poh");
         let cat2 = value_2.join().expect("hu poh");
         let cat3 = value_3.join().expect("hu poh");
 
@@ -90,11 +90,63 @@ mod threads_activity {
         // println!("{}{}{}", cat, cat2, cat3);
 
         // concat and return
-        cat.to_owned() + cat2 + cat3
+        cat1.to_owned() + cat2 + cat3
     }
 
     pub fn run() {
         println!("{:?}", spawn_threads());
+    }
+}
+
+mod channels {
+    use crossbeam_channel::unbounded;
+    use std::thread;
+
+    enum WorkerMsg {
+        PrintData(String),
+        Sum(i64, i64),
+        Quit,
+    }
+
+    enum MainMsg {
+        SumResult(i64),
+        WorkerQuit,
+    }
+
+    pub fn run() {
+        let (worker_tx, worker_rx) = unbounded();
+        let (main_tx, main_rx) = unbounded();
+        // spawn new threads
+        let worker = thread::spawn(move || loop {
+            // match on the received messages with worker-rx
+            match worker_rx.recv() {
+                Ok(msg) => match msg {
+                    WorkerMsg::PrintData(data) => println!("{}", data),
+                    WorkerMsg::Sum(a, b) => {
+                        main_tx.send(MainMsg::SumResult(a + b)).unwrap();
+                    }
+                    WorkerMsg::Quit => break,
+                },
+                Err(_) => break,
+            }
+        });
+
+        // send data to the channel
+        worker_tx
+            .send(WorkerMsg::PrintData(String::from("hello")))
+            .unwrap();
+        worker_tx.send(WorkerMsg::Quit).unwrap();
+
+        // receive data from the channel
+        while let Ok(msg) = main_rx.recv() {
+            let result = main_rx.recv().unwrap();
+            match result {
+                MainMsg::SumResult(sum) => println!("{}", sum),
+                MainMsg::WorkerQuit => println!("Quit"),
+            }
+        }
+
+        drop(worker_tx);
     }
 }
 
@@ -103,4 +155,5 @@ fn main() {
     threads::run();
     threads_activity::run();
     // threads_activity::spawn_threads();
+    channels::run();
 }
