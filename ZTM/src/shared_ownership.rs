@@ -78,6 +78,70 @@ mod shared_mutability_ref_cells {
     }
 }
 
+mod smart_pointers_interior_mutability_demo {
+    use std::cell::RefCell;
+    use std::rc::Rc;
+
+    #[derive(Debug)]
+    enum MenuItem {
+        Drink,
+        Salad,
+    }
+
+    #[derive(Debug)]
+    struct ItemOrder {
+        item: MenuItem,
+        quantity: u32,
+    }
+
+    // all orders at a table
+    struct TableOrder {
+        items: Vec<ItemOrder>,
+    }
+
+    fn new_table_order() -> TableOrder {
+        TableOrder {
+            items: vec![ItemOrder {
+                item: MenuItem::Drink,
+                quantity: 1,
+            }],
+        }
+    }
+
+    // this type alias contains the Vec of TableOrder
+    type Order = Rc<RefCell<Vec<TableOrder>>>;
+
+    #[derive(Debug)]
+    struct Chef(Order);
+
+    #[derive(Debug)]
+    struct WaitStaff(Order);
+
+    #[derive(Debug)]
+    struct Accounting(Order);
+
+    pub fn run() {
+        let orders = Rc::new(RefCell::new(vec![]));
+
+        // all the staff has access to the orders
+        let chef = Chef(Rc::clone(&orders));
+        let wait_staff = WaitStaff(orders.clone());
+        let accounting = Accounting(orders.clone());
+
+        // new order
+        let new_order = new_table_order();
+
+        {
+            orders.borrow_mut().push(new_table_order());
+        }
+
+        dbg!(chef.0.borrow());
+        dbg!(wait_staff.0.borrow());
+        dbg!(accounting.0.borrow());
+    }
+}
+
 fn main() {
     shared_mutability::run();
+    shared_mutability_ref_cells::run();
 }
