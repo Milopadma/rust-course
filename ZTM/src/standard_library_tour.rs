@@ -270,6 +270,7 @@ mod intermediary_struct_iterator {
         for c in color {
             // implicitly call intoiter() on color
             println!("{}", c); // prints 255, 0, 0
+
         }
     }
 }
