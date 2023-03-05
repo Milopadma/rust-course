@@ -22,7 +22,16 @@ mod comparing_enums {
 }
 
 mod comparing_structs {
-    #[derive(PartialEq, PartialOrd)]
+
+    // manually implementing PartialOrd for struct Point
+    // since PartialOrd derives only uses the first field
+    impl PartialOrd for Point {
+        fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+            Some(self.x.cmp(&other.x))
+        }
+    }
+
+    #[derive(PartialEq)]
     struct Point {
         x: i32,
         y: i32,
