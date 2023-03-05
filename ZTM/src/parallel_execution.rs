@@ -14,8 +14,7 @@ mod advanced_closures {
     }
 }
 
-mod threads {
-    use std::{
+mod threads {    use std::{
         thread::{self, JoinHandle},
         time::Duration,
     };

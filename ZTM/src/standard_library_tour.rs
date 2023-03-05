@@ -199,6 +199,81 @@ mod implementing_iterator_activity {
     }
 }
 
+mod intermediary_struct_iterator {
+
+    // the data structure that needs an intermediary/proxy
+    struct Color {
+        r: u8,
+        g: u8,
+        b: u8,
+    }
+
+    // act as a intermediary/proxy
+    struct ColorIntoIter {
+        color: Color,
+        position: u8,
+    }
+
+    struct ColorIter<'a> {
+        color: &'a Color, // borrow color
+        position: u8,
+    }
+
+    // impl iter for ColorIntoIter
+    impl Iterator for ColorIntoIter {
+        type Item = u8; // since all the items are u8
+        fn next(&mut self) -> Option<Self::Item> {
+            let next = match self.position {
+                0 => Some(self.color.r),
+                1 => Some(self.color.g),
+                2 => Some(self.color.b),
+                _ => None,
+            };
+
+            self.position += 1;
+            next // return the value wrapped in Option
+        }
+    }
+
+    // impl into-iter for Color to use the into-iter to
+    //turn the Color struct into a intermediary iterator struct
+    impl IntoIterator for Color {
+        type Item = u8;
+        type IntoIter = ColorIntoIter; // the intermediary iterator struct
+
+        fn into_iter(self) -> Self::IntoIter {
+            Self::IntoIter {
+                color: self,
+                position: 0,
+            }
+        }
+    }
+
+    // // borrow
+    // // impl the iter for mutable Color struct
+    // impl<'a> Iterator for ColorIter<'a> {
+    //     type Item = u8;
+    //     fn next(&mut self) -> Option<Self::Item> {
+    //         let next = match self.position {
+    //             0 => Some(self.color.r),
+    //             1 => Some(self.color.g),
+    //             2 => Some(self.color.b),
+    //             _ => None,
+    //         };
+    //         self.position += 1;
+    //         next
+    //     }
+    // }
+
+    pub fn run() {
+        let color = Color { r: 255, g: 0, b: 0 };
+        for c in color {
+            // implicitly call intoiter() on color
+            println!("{}", c); // prints 255, 0, 0
+        }
+    }
+}
+
 fn main() {
     // comparing_enums::run();
     // comparing_structs::run();
@@ -206,4 +281,5 @@ fn main() {
     iterator_implementation::run();
     into_interator_implementation::run();
     implementing_iterator_activity::run();
+    intermediary_struct_iterator::run();
 }
