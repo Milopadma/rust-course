@@ -4,6 +4,7 @@ mod parallel_execution;
 mod readability;
 mod shared_functionality;
 mod shared_ownership;
+mod standard_library_tour;
 mod trytypes;
 
 // i32 type addition

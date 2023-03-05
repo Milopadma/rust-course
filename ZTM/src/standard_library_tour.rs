@@ -109,9 +109,101 @@ mod iterator_implementation {
     }
 }
 
+mod into_interator_implementation {
+    // since we need mutable access to structures to implement iteration over them,
+    // we can instead turn the structure into an iterator so we dont have to
+    // turn into mutable
+    use std::iter::FromIterator;
+    use std::iter::IntoIterator;
+    use std::iter::Iterator;
+
+    // the default IntoIterator trait
+    // trait IntoIterator {
+    //     type Item;
+    //     type IntoIter;
+    //     fn into_iter(self) -> Self::IntoIter;
+    // }
+
+    struct Friends {
+        friends: Vec<String>,
+    }
+
+    // standard imlpementation for intoiter, consumes the struct
+    // impl IntoIterator for Friends {
+    //     type Item = String;
+    //     type IntoIter = std::vec::IntoIter<Self::Item>;
+    //     fn into_iter(self) -> Self::IntoIter {
+    //         self.friends.into_iter() // turn the collection to a iterator without mutating
+    //     }
+    // }
+
+    // intoiterator impl but using borrows and lifetimes to allow multiple
+    // iterations in scope
+    impl<'a> IntoIterator for &'a Friends {
+        type Item = &'a String;
+        type IntoIter = std::slice::Iter<'a, String>;
+        fn into_iter(self) -> Self::IntoIter {
+            self.friends.iter()
+        }
+    }
+
+    pub fn run() {
+        let friends = Friends {
+            friends: vec!["John".to_string(), "Jane".to_string(), "Janni".to_string()],
+        };
+        for f in &friends {
+            // now we can borrow
+            println!("{}", f);
+        }
+    }
+}
+
+mod implementing_iterator_activity {
+
+    struct Multiplier {
+        factor: isize,
+        per_iter: isize,
+    }
+
+    impl Multiplier {
+        fn new() -> Self {
+            Multiplier {
+                factor: 0,
+                per_iter: 1,
+            }
+        }
+    }
+
+    // a custom Iterator Implementation for Multiplier
+    impl Iterator for Multiplier {
+        type Item = isize;
+        fn next(&mut self) -> Option<Self::Item> {
+            self.factor += self.per_iter; // increase by 1 per iteration
+            Some(self.factor)
+        }
+    }
+
+    struct Game {
+        score: u32,
+        multiplier: Multiplier,
+    }
+
+    pub fn run() {
+        let mut multiplier = Multiplier::new();
+
+        println!("{:?}", multiplier.next());
+        println!("{:?}", multiplier.next());
+        println!("{:?}", multiplier.next());
+        println!("{:?}", multiplier.next());
+        println!("{:?}", multiplier.next());
+    }
+}
+
 fn main() {
     // comparing_enums::run();
     // comparing_structs::run();
     // operator_overloading::run();
     iterator_implementation::run();
+    into_interator_implementation::run();
+    implementing_iterator_activity::run();
 }
