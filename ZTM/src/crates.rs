@@ -98,3 +98,33 @@ mod regex_crate {
         Regex::new(re).expect("Failed to compile regex")
     }
 }
+
+mod chrono_crate {
+    use chrono::prelude::*;
+
+    pub fn run() {
+        let now = Utc::from(Utc::now());
+        println!("{:?}", now);
+    }
+}
+
+mod strum_crate {
+    use strum::{EnumCount, IntoEnumIterator}; //string enum
+
+    #[derive(Debug, EnumCount, EnumIter)]
+    enum Color {
+        Red,
+        Green,
+        Blue,
+    }
+
+    impl Color {
+        fn print_mul(&self) {
+            for variant in Color::iter() {
+                println!("{:?}", self::COUNT);
+            }
+        }
+    }
+}
+
+mod derive_more {}
