@@ -1,5 +1,6 @@
 pub mod bill_manager;
 mod channels_activity;
+mod crates;
 mod parallel_execution;
 mod readability;
 mod shared_functionality;

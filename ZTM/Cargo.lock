@@ -7,8 +7,11 @@ name = "ZTM"
 version = "0.1.0"
 dependencies = [
  "crossbeam-channel",
+ "dotenv",
  "parking_lot",
  "rgb",
+ "serde",
+ "serde_derive",
  "thiserror",
 ]
 
@@ -54,6 +57,12 @@ checksum = "3c063cd8cc95f5c377ed0d4b49a4b21f632396ff690e8470c29b3359b346984b"
 dependencies = [
  "cfg-if",
 ]
+
+[[package]]
+name = "dotenv"
+version = "0.15.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77c90badedccf4105eca100756a0b1289e191f6fcbdadd3cee1d2f614f97da8f"
 
 [[package]]
 name = "libc"
@@ -135,6 +144,23 @@ name = "scopeguard"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
+
+[[package]]
+name = "serde"
+version = "1.0.153"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3a382c72b4ba118526e187430bb4963cd6d55051ebf13d9b25574d379cc98d20"
+
+[[package]]
+name = "serde_derive"
+version = "1.0.153"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1ef476a5790f0f6decbc66726b6e5d63680ed518283e64c7df415989d880954f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "smallvec"
