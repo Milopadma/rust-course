@@ -76,12 +76,25 @@ mod cached_crate {
     use std::thread;
     use std::time::Duration;
 
-    #[cached(sized = 10, time = 30)]
+    #[cached(size = 10, time = 30)]
     fn expensive(n: usize) -> usize {
         thread::sleep(Duration::from_millis(500));
         match n {
             1 => 1,
             _ => n,
         }
+    }
+}
+
+mod regex_crate {
+    use cached::proc_macro::cached;
+    use regex::Regex;
+
+    #[cached]
+    pub fn run() -> Regex {
+        // match ISO 8601 DATEs
+        const re: &'static str = r"\d{4}-\d{2}-\d{2}";
+
+        Regex::new(re).expect("Failed to compile regex")
     }
 }
