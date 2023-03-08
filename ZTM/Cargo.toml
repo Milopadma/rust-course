@@ -19,3 +19,5 @@ cached = "0.42.0"
 regex = "1.7.1"
 chrono = "0.4.23"
 strum = { version = "0.24.1", features = ["derive"] }
+rayon = "1.7.0"
+derive_more = "0.99.17"

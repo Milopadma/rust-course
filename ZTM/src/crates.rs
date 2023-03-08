@@ -127,4 +127,36 @@ mod strum_crate {
     }
 }
 
-mod derive_more {}
+mod derive_more {
+
+    use derive_more::Display;
+    use derive_more::From;
+
+    #[derive(Display, fmt = "Item: {}, Quantity: {}", item, qty)]
+    struct Order {
+        item: String,
+        qty: usize,
+    }
+
+    #[derive(From)]
+    struct Person {
+        name: String,
+    }
+
+    pub fn run() {
+        let order = Order {
+            item: "item".to_string(),
+            qty: 1,
+        };
+    }
+}
+
+mod rayon_crate {
+    use rayon::prelude::*; // ez parallel exec
+
+    pub fn run() {
+        let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        let numbers = numbers.par_iter().map(|x| x * 2).collect::<Vec<_>>();
+    }
+}
