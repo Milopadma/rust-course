@@ -13,5 +13,7 @@ thiserror = "*"
 crossbeam-channel = "0.5.7"
 parking_lot = "0.12.1"
 dotenv = "0.15.0"
-serde = "1.0.153"
-serde_derive = "1.0.153"
+serde = { version = "1.0", features = ["derive"] }
+rand = "0.8.5"
+cached = "0.42.0"
+

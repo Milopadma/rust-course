@@ -44,3 +44,44 @@ mod serde_crate {
         deserialize
     }
 }
+
+mod rand_crate {
+    use rand::{
+        distributions::{Distribution, Uniform},
+        seq::{IteratorRandom, SliceRandom},
+        thread_rng, Rng,
+    };
+
+    pub fn run() {
+        let mut rng = thread_rng();
+        let number = rng.gen_range(0..10);
+        let mut array = vec![];
+        for _ in 0..number {
+            array.push(rng.gen_range(0..10));
+        }
+
+        println!("{:?}", array.iter().choose(&mut rng));
+
+        let mut derefList = *array;
+        println!("{:?}", derefList.shuffle(&mut rng));
+
+        let range = Uniform::from(5.500);
+        let mut rng = thread_rng();
+        println!("{:?}", range.sample(&mut rng));
+    }
+}
+
+mod cached_crate {
+    use cached::proc_macro::cached;
+    use std::thread;
+    use std::time::Duration;
+
+    #[cached(sized = 10, time = 30)]
+    fn expensive(n: usize) -> usize {
+        thread::sleep(Duration::from_millis(500));
+        match n {
+            1 => 1,
+            _ => n,
+        }
+    }
+}
