@@ -2,12 +2,12 @@ pub mod field;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Clip {
-    pub name: field::ClipID,
-    pub shortcode: field,
-    pub content: field,
-    pub title: field,
-    pub posted: field,
-    pub expires: field,
-    pub password: field,
-    pub hits: field,
+    pub name: field::ClipId,
+    pub shortcode: field::ShortCode,
+    pub content: field::Content,
+    pub title: field::Title,
+    pub posted: field::Posted,
+    pub expires: field::Expires,
+    pub password: field::Password,
+    pub hits: field::Hits,
 }
