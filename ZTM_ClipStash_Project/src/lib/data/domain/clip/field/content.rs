@@ -16,6 +16,7 @@ impl Content {
     pub fn into_inner(self) -> String {
         self.0
     }
+
     // borrows the content
     pub fn as_str(&self) -> &str {
         &self.0.as_str()
