@@ -56,11 +56,11 @@ mod closures_iterators_activity {
         // Hint: .to_uppercase() is a method on `str` which returns a String
 
         let words = vec!["autobot", "beach", "car", "decepticon", "energon", "frothy"];
-        let transformed: Vec<String> = words
+        let transformed = words
             .into_iter()
             .filter(|word| !word.contains("h"))
             .map(|word| word.to_uppercase())
-            .collect();
+            .collect::<Vec<_>>();
         println!("Transformed: {:?}", transformed);
 
         // Challenge:
