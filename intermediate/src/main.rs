@@ -183,11 +183,18 @@ mod traits {
         }
 
         smell_cake(party);
+        smell_cake(&party);
 
         // Challenge 2: Implement `From<&Party> for Cake` so that you can smell
         // your cake without consuming it. Change the code above to pass in a
         // &party. Then uncomment and run the code below. After all, you want to
         // smell your cake and eat it, too!
+
+        impl From<&Party> for Cake {
+            fn from(&party: &Party) -> Self {
+                party.cake
+            }
+        }
 
         println!(
             "Yum! I'm eating this cake: {:?}. Oops, I dropped it on the
@@ -201,9 +208,9 @@ mod traits {
         println!("What a nice {:?} cake! 🎂", cake);
     }
 
-    // pub fn smell_cake<T: Into<Cake>>(something: T) {
-    //     println!("Hmm...something smells like a {:?} cake!", something.into());
-    // }
+    pub fn smell_cake<T: Into<Cake>>(something: T) {
+        println!("Hmm...something smells like a {:?} cake!", something.into());
+    }
 }
 
 fn main() {
